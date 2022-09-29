@@ -1,5 +1,6 @@
 import discord
 import responses
+import os
 
 async def send_message(message, user_message, is_private):
     try:
@@ -9,17 +10,20 @@ async def send_message(message, user_message, is_private):
         print(e)
 
 def run_discord_bot():
-    TOKEN = 'MTAyNDgzMTQxMjc4MTcxOTU5Mg.G1rGNV.dn57BwlG2WqLaEo008jVjcPkLrbrA4ElzFsJEs'
+    TOKEN = 'MTAyNDg2NjA4MjEyMjY0OTY0MQ.GEs7zg.51tUHKlvH4_1mChXXl6gTxYzJMC6D6r_acBjzY'
     client = discord.Client(intents=discord.Intents.default())
 
     @client.event
     async def on_ready():
-        print(f'{client.user} is up and running.')
+        print(f'{client.user} has connected to discord!')
 
     @client.event
     async def on_message(message):
         if message.author == client.user:
             return
+
+        if message.content.startswith('$hello'):
+            await message.channel.send('Hello!')
 
         username = str(message.author)
         user_message = str(message.content)
@@ -35,4 +39,4 @@ def run_discord_bot():
 
 
 
-    client.run(TOKEN)
+    client.run(os.getenv('TOKEN'))
