@@ -10,6 +10,9 @@ def run_discord_bot():
     intents.message_content = True
     client = discord.Client(intents=intents)
 
+    TOKEN = 'put token here'
+    client = discord.Client(intents=discord.Intents.default())
+
     @client.event
     async def on_ready():
         #lets us know bot connected to discord
